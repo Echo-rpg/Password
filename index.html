@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>密码生成器</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  input[type="number"], button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<input type="number" id="length" min="12" max="40" placeholder="输入12-40之间的整数">
+<button onclick="generatePassword()">生成密码</button>
+<p id="password"></p>
+
+<script>
+function generatePassword() {
+  var length = document.getElementById('length').value;
+  var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}:\"<>?";
+  var retVal = "";
+  if(length >= 12 && length <= 40) {
+    for (var i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    document.getElementById('password').textContent = "生成的密码: " + retVal;
+  } else {
+    document.getElementById('password').textContent = "密码长度应当介于12-40之间且为一个整数，没有精神，重来！";
+  }
+}
+</script>
+
+</body>
+</html>
